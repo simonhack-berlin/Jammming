@@ -3,6 +3,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import './App.css';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import Spotify from '../../util/Spotify';
 
 
 class App extends React.Component {
@@ -65,7 +66,9 @@ this.search = this.search.bind(this);
     const trackUris = this.state.playlistTracks.map(track => track.uri);
   }
   search(term) {
-console.log(term);
+   Spotify.search(term).then(searchResults => {
+     this.setState({searchResults: searchResults});
+   });
   }
   render() {
     return (
